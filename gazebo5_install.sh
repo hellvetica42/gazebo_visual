@@ -17,14 +17,6 @@
 
 codename=`lsb_release -sc`
 
-# Make sure we are running a valid Ubuntu distribution
-case $codename in
-  "trusty" | "utopic")
-  ;;
-  *)
-    echo "This script will only work on Ubuntu trusty or utopic"
-    exit 0
-esac
 
 # Add the OSRF repository
 if [ ! -e /etc/apt/sources.list.d/gazebo-latest.list ]; then
