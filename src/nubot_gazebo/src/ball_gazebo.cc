@@ -47,8 +47,8 @@ void BallGazebo::Load(physics::ModelPtr _parent, sdf::ElementPtr /*_sdf*/)
 void BallGazebo::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
 {
     /*速度指令*/
-    vel_y_ = joy->axes[idx_X]*5;
-    vel_x_ = -joy->axes[idx_Y]*5;
+    //vel_y_ = joy->axes[idx_X]*5;
+    //vel_x_ = -joy->axes[idx_Y]*5;
 }
 
 void BallGazebo::UpdateChild()

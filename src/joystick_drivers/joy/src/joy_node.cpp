@@ -37,6 +37,8 @@
 #include <diagnostic_updater/diagnostic_updater.h>
 #include "ros/ros.h"
 #include <sensor_msgs/Joy.h>
+#include <cstdlib>
+#include <string>
 
 
 ///\brief Opens, reads from and publishes joystick events
@@ -90,9 +92,15 @@ public:
     diagnostic_.setHardwareID("none");
 
     // Parameters
+
     ros::NodeHandle nh_param("~");
-    pub_ = nh_.advertise<sensor_msgs::Joy>("joy", 1);
+
     nh_param.param<std::string>("dev", joy_dev_, "/dev/input/js0");
+
+    std::string joyName = "joy";
+    joyName = joyName + joy_dev_[13];
+    pub_ = nh_.advertise<sensor_msgs::Joy>(joyName, 1);
+
     nh_param.param<double>("deadzone", deadzone_, 0.14);
     nh_param.param<double>("autorepeat_rate", autorepeat_rate_, 0);
     nh_param.param<double>("coalesce_interval", coalesce_interval_, 0.001);
@@ -323,9 +331,17 @@ public:
   }
 };
 
-int main(int argc, char **argv)
+#include <sstream>
+#include <time.h>
+
+int main(int argc, char *argv[])
 {
-  ros::init(argc, argv, "joy_node");
+  std::srand(time(0));
+  int num = std::rand();
+  std::ostringstream oss;
+  oss << "joy_node" << num;
+  std::cout<<"Running node: "<<oss.str()<<std::endl;
+  ros::init(argc, argv, oss.str());
   Joystick j;
   return j.main(argc, argv);
 }

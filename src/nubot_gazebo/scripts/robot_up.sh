@@ -40,5 +40,7 @@ done
 
 
 ### use joystick
-rosrun joy joy_node &
+#rosrun joy joy_node _dev:=/dev/input/js0 &
+#rosrun joy joy_node _dev:=/dev/input/js1 &
+#rosrun joy joy_node _dev:=/dev/input/js2 &
 

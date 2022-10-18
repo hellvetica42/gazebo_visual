@@ -1,0 +1,5 @@
+<launch>
+
+<node name="nubot1" pkg="control_base" type="control_base_node" args="1" />
+
+</launch>
